@@ -1,0 +1,92 @@
+1、启动mysql服务net start mysql
+2、关闭mysql服务net stop mysql
+3、登录mysql  mysql -uroot -proot
+4、创建数据库create database mydb1
+5、切换数据库use 数据库名
+6、查询数据库表的定义信息 show create database 数据库名
+7、删除数据库drop 数据库名
+8、创建表
+create table 表名称(
+	字段1  类型(长度)  约束,
+	字段2  类型(长度)  约束
+)
+
+create table student(
+         studentId   int  primary key auto_increment,
+         studentName  varchar(20) not null,
+         age  int,
+         address  varchar(50),
+         phoneNo   char(11),
+         brithday  Date,
+         creDate   dateTime,
+         updDate  dateTime         
+);
+
+insert into student(studentId,studentName,age,address,phoneNo,brithday,creDate) values(1,'徐佳俊',21,'湖南衡阳','18621619509','1998-03-09',now());
+insert into student(studentId,studentName,age,address,phoneNo,brithday,creDate) values('徐佳俊',21,'湖南衡阳','18621619509','1998-03-09',now());
+insert into student(studentId,studentName,age,address,phoneNo,brithday,creDate) values('徐佳俊',21,'湖南衡阳','18621619509','1998-03-09',now());
+9、创建表的字段类型
+字符串类型：
+varchar长度可变    
+char长度不可变，如果长度不够用空格不全
+大数据类型：
+blob：字节
+text：字符
+数值型：
+tinyint、smallint、int、bigint、float、double
+逻辑型
+bit：Java中是True或false，存入数据库为1或0
+日期型：
+Date：包含日期（年月日）
+Time：包含时间（时分秒）
+DateTime：包含日期和时间,如果插入数据为空，那么字段为空。
+TimeStamp：包含日期和时间,如果插入数据为空，默认获取系统时间。
+
+10、约束（保证数据的完整性）
+唯一约束：声明字段是唯一的，关键字unique。
+非空约束：声明字段值不能为空，关键字not null。
+主键约束：代表记录的唯一标识。
+（1）关键字：primary key
+（2）唯一：值不能相同
+（3）被引用：和外键一起来使用
+
+11、查看所有的mysql数据库   show databases;
+
+12、修改数据库表结构
+（1）添加一个新的字段：alter table 表名称 add 字段名称 数据库类型(长度) 约束;
+（2）修改字段的数据类型、长度或者约束：alter table 表名称 modify 字段名称 数据库类型(长度) 约束;
+（3）删除某一个字段：alter table 表名称 drop 字段名称；
+（4）修改表的名称：rename table 旧表名 to 新表名；
+
+13、查看数据库表结构   show  create table 表名；
+14、查看所有表   show  tables；
+15、查看mysql的编码 show variables like '%char%';
+16、删除表中所有数据事务回滚
+start transaction(开启事务)；
+删除语句；
+rollback;(回滚)
+17、Distinct去重。
+18、自动增长  auto_increment
+19、外键：保证数据的完整性
+create table score( 
+         studentId  int auto_increment,    
+         subject varchar(5) not null,
+         score int not null,
+         constraint fk foreign key(studentId) references student(studentId)
+);
+
+insert into score(studentId,subject,score) values(1,'JAVA',0);
+
+
+执行mysql脚本
+mysql>use 数据库名;
+mysql>set names utf8; --设置传输编码,避免中文乱码
+mysql>source d:/xxx.sql; -- source 文件路径
+20、create index idx_t1_bcd on t1(b asc,c desc,d desc);//创建索引
+
+
+
+
+
+
+
